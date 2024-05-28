@@ -43,6 +43,7 @@ let computerSequence = [];
 
 // random computer sequence generator
 function randomIngredients() {
+  computerSequence.length = 0;
   for (let i = 0; i < 6; i++) {
     const getRandomIngredient =
       ingredients[Math.floor(Math.random() * ingredients.length)];
@@ -75,11 +76,34 @@ const userInput = document.addEventListener(
     } else if (e.code === "Backspace") {
       playerSequence.pop();
     } else if (e.code === "Enter") {
+      submitDish(playerSequence, computerSequence);
     } else {
       return;
     }
 
-    console.log(playerSequence);
+    // console.log(playerSequence);
   },
   true
 );
+
+// check to see if player input is correct or not
+let totalMoneyEarn = 0;
+
+function submitDish(playerDish, computerDish) {
+  if (playerDish.length !== computerDish.length) {
+    return console.log("You made the wrong dish");
+  } else {
+    for (let i = 0; i < playerDish.length; i++) {
+      if (playerDish[i] !== computerDish[i]) {
+        return console.log("You made the wrong dish");
+      }
+    }
+    totalMoneyEarn += 15;
+    randomIngredients();
+    playerSequence.length = 0;
+    console.log("you serve: " + playerSequence);
+    console.log("your customer wanted: " + computerSequence);
+    console.log(totalMoneyEarn);
+    console.log(computerSequence);
+  }
+}
