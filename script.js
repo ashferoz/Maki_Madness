@@ -1,5 +1,17 @@
+// 1. timer starts
+// 2. ingredient sequence prompt from game
+// 3. player key in sequence of ingredients
+// 4. if correct order of sequence => money counter adds $5 => player input clears => step 2
+// 5. if wrong order of sequence => player input vibrates? or change colour? player input clears
+// 6. timer stops
+// 7. show how much money player earns, restart button, continue button, main menu button
+// 8. if player lose continue button is disabled, player can only restart or go back to main menu
+// if player restarts same timer duration happens
+// if player continues timer with lesser duration happens
+
 // timer function (to change timer duration => change value of duration variable)
-let timerInSeconds = setInterval(updateTimer, 1000);
+let timerDisplay = setInterval(updateTimer, 1000);
+console.log("time starts");
 
 let duration = 10;
 
@@ -20,6 +32,22 @@ function updateTimer() {
 
   if (duration < 0) {
     duration = 0;
-    clearInterval(timerInSeconds);
+    clearInterval(timerDisplay);
+    console.log("times up");
   }
 }
+
+const ingredients = ["mushroom", "chicken", "kani", "ebi", "tamago", "kawaebi"];
+
+let computerSequence = [];
+
+// random computer sequence generator
+function randomIngredients() {
+  for (let i = 0; i < 6; i++) {
+    const getRandomIngredient =
+      ingredients[Math.floor(Math.random() * ingredients.length)];
+    computerSequence.push(getRandomIngredient);
+  }
+}
+randomIngredients();
+console.log(computerSequence);
