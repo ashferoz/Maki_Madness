@@ -51,3 +51,35 @@ function randomIngredients() {
 }
 randomIngredients();
 console.log(computerSequence);
+
+// player inputs
+let playerSequence = [];
+
+const userInput = document.addEventListener(
+  "keydown",
+  function (e) {
+    e.preventDefault();
+
+    if (e.code === "KeyW") {
+      playerSequence.push("mushroom");
+    } else if (e.code === "KeyA") {
+      playerSequence.push("chicken");
+    } else if (e.code === "KeyD") {
+      playerSequence.push("kani");
+    } else if (e.code === "KeyJ") {
+      playerSequence.push("tamago");
+    } else if (e.code === "KeyI") {
+      playerSequence.push("ebi");
+    } else if (e.code === "KeyL") {
+      playerSequence.push("kawaebi");
+    } else if (e.code === "Backspace") {
+      playerSequence.pop();
+    } else if (e.code === "Enter") {
+    } else {
+      return;
+    }
+
+    console.log(playerSequence);
+  },
+  true
+);
