@@ -13,7 +13,7 @@
 let timerDisplay = setInterval(updateTimer, 1000);
 console.log("time starts");
 
-let duration = 10;
+let duration = 2 * 60;
 
 const timerElement = document.querySelector("#timer");
 
@@ -81,7 +81,7 @@ const userInput = document.addEventListener(
       return;
     }
 
-    // console.log(playerSequence);
+    console.log(playerSequence);
   },
   true
 );
