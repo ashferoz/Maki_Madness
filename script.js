@@ -86,24 +86,42 @@ const userInput = document.addEventListener(
   true
 );
 
-// check to see if player input is correct or not
+// player earnings
 let totalMoneyEarn = 0;
 
+// update counter
+function updateCounter() {
+  const targetCounter = document.querySelector("#counter");
+  targetCounter.innerText = "$" + totalMoneyEarn + ".00";
+}
+
+// update pop up result counter
+function updateResultCounter() {
+  const targetResultCounter = document.querySelector(".player-earnings");
+  targetResultCounter.innerText = "$" + totalMoneyEarn + ".00";
+}
+
+// check to see if player input is correct or not
 function submitDish(playerDish, computerDish) {
   if (playerDish.length !== computerDish.length) {
+    totalMoneyEarn -= 5;
+    updateCounter();
+    updateResultCounter();
     return console.log("You made the wrong dish");
   } else {
     for (let i = 0; i < playerDish.length; i++) {
       if (playerDish[i] !== computerDish[i]) {
+        totalMoneyEarn -= 5;
+        updateCounter();
+        updateResultCounter();
         return console.log("You made the wrong dish");
       }
     }
     totalMoneyEarn += 15;
     randomIngredients();
+    updateCounter();
+    updateResultCounter();
     playerSequence.length = 0;
-    console.log("you serve: " + playerSequence);
-    console.log("your customer wanted: " + computerSequence);
-    console.log(totalMoneyEarn);
     console.log(computerSequence);
   }
 }
