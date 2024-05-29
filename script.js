@@ -1,3 +1,4 @@
+// 1. let player know what is the earning goal for the day, timer display for 3 seconds
 // 1. timer starts
 // 2. ingredient sequence prompt from game
 // 3. player key in sequence of ingredients
@@ -9,14 +10,16 @@
 // if player restarts same timer duration happens
 // if player continues timer with lesser duration happens
 
+// display timer and result
+const timerElement = document.querySelector("#timer");
+const displayResult = document.querySelector("#result");
+displayResult.style.visibility = "hidden";
+
 // timer function (to change timer duration => change value of duration variable)
 let timerDisplay = setInterval(updateTimer, 1000);
 console.log("time starts");
 
-let duration = 2 * 60;
-
-const timerElement = document.querySelector("#timer");
-
+let duration = 60;
 function updateTimer() {
   const minutes = Math.floor(duration / 60);
   let seconds = duration % 60;
@@ -32,6 +35,7 @@ function updateTimer() {
 
   if (duration < 0) {
     duration = 0;
+    displayResult.style.visibility = "visible";
     clearInterval(timerDisplay);
     console.log("times up");
   }
@@ -74,7 +78,12 @@ const userInput = document.addEventListener(
     } else if (e.code === "KeyL") {
       playerSequence.push("kawaebi");
     } else if (e.code === "Backspace") {
-      playerSequence.pop();
+      playerSequence.length = 0;
+      if (duration <= 5) {
+        duration = 0;
+      } else {
+        duration -= 5;
+      }
     } else if (e.code === "Enter") {
       submitDish(playerSequence, computerSequence);
     } else {
@@ -88,6 +97,8 @@ const userInput = document.addEventListener(
 
 // player earnings
 let totalMoneyEarn = 0;
+const refund = 15;
+const customerPays = 15;
 
 // update counter
 function updateCounter() {
@@ -104,20 +115,20 @@ function updateResultCounter() {
 // check to see if player input is correct or not
 function submitDish(playerDish, computerDish) {
   if (playerDish.length !== computerDish.length) {
-    totalMoneyEarn -= 5;
+    totalMoneyEarn -= refund;
     updateCounter();
     updateResultCounter();
     return console.log("You made the wrong dish");
   } else {
     for (let i = 0; i < playerDish.length; i++) {
       if (playerDish[i] !== computerDish[i]) {
-        totalMoneyEarn -= 5;
+        totalMoneyEarn -= refund;
         updateCounter();
         updateResultCounter();
         return console.log("You made the wrong dish");
       }
     }
-    totalMoneyEarn += 15;
+    totalMoneyEarn += customerPays;
     randomIngredients();
     updateCounter();
     updateResultCounter();
