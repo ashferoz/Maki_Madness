@@ -10,8 +10,17 @@
 // if player restarts same timer duration happens
 // if player continues timer with lesser duration happens
 
-//
+// start game
+const startButton = document.querySelector(".start");
+startButton.addEventListener("click", function (e) {
+  let timerDisplay = setInterval(updateTimer, 1000);
+  console.log("time starts");
 
+  userInput();
+
+  const startWindow = document.querySelector(".start-window");
+  startWindow.style.visibility = "hidden";
+});
 
 // display timer and result
 const timerElement = document.querySelector("#timer");
@@ -19,10 +28,8 @@ const displayResult = document.querySelector("#result-window");
 displayResult.style.visibility = "hidden";
 
 // timer function (to change timer duration => change value of duration variable)
-let timerDisplay = setInterval(updateTimer, 1000);
-console.log("time starts");
 
-let duration = 5 * 60;
+let duration = 5;
 function updateTimer() {
   const minutes = Math.floor(duration / 60);
   let seconds = duration % 60;
@@ -72,40 +79,42 @@ let currentEarningsNeeded = 15;
 // }
 
 // player inputs
-const userInput = document.addEventListener(
-  "keydown",
-  function (e) {
-    // e.preventDefault();
+function userInput() {
+  document.addEventListener(
+    "keydown",
+    function (e) {
+      // e.preventDefault();
 
-    if (e.code === "KeyA") {
-      playerSequence.push("tuna");
-    } else if (e.code === "KeyW") {
-      playerSequence.push("salmon");
-    } else if (e.code === "KeyD") {
-      playerSequence.push("wasabi");
-    } else if (e.code === "KeyJ") {
-      playerSequence.push("tamago");
-    } else if (e.code === "KeyI") {
-      playerSequence.push("ikura");
-    } else if (e.code === "KeyL") {
-      playerSequence.push("ebi");
-    } else if (e.code === "Backspace") {
-      playerSequence.length = 0;
-      if (duration <= 5) {
-        duration = 0;
+      if (e.code === "KeyA") {
+        playerSequence.push("tuna");
+      } else if (e.code === "KeyW") {
+        playerSequence.push("salmon");
+      } else if (e.code === "KeyD") {
+        playerSequence.push("wasabi");
+      } else if (e.code === "KeyJ") {
+        playerSequence.push("tamago");
+      } else if (e.code === "KeyI") {
+        playerSequence.push("ikura");
+      } else if (e.code === "KeyL") {
+        playerSequence.push("ebi");
+      } else if (e.code === "Backspace") {
+        playerSequence.length = 0;
+        if (duration <= 5) {
+          duration = 0;
+        } else {
+          duration -= 5;
+        }
+      } else if (e.code === "Enter") {
+        submitDish(playerSequence, computerSequence);
       } else {
-        duration -= 5;
+        return;
       }
-    } else if (e.code === "Enter") {
-      submitDish(playerSequence, computerSequence);
-    } else {
-      return;
-    }
 
-    console.log(playerSequence);
-  },
-  true
-);
+      console.log(playerSequence);
+    },
+    true
+  );
+}
 
 // player earnings
 let totalMoneyEarn = 0;
