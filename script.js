@@ -10,16 +10,6 @@
 // if player restarts same timer duration happens
 // if player continues timer with lesser duration happens
 
-// game state
-let game_Menu = "main menu";
-let game_Intro = "game instructions";
-let game_Conditions = "how much earnings needed";
-let game_Start = "timer starts";
-let game_End = "timer stops";
-let game_Restart = "replay same level again";
-let game_Continue = "play next level";
-let gameState = null;
-
 // display timer and result
 const timerElement = document.querySelector("#timer");
 const displayResult = document.querySelector("#result-window");
@@ -29,7 +19,7 @@ displayResult.style.visibility = "hidden";
 let timerDisplay = setInterval(updateTimer, 1000);
 console.log("time starts");
 
-let duration = 20;
+let duration = 5 * 60;
 function updateTimer() {
   const minutes = Math.floor(duration / 60);
   let seconds = duration % 60;
@@ -56,6 +46,7 @@ function updateTimer() {
 const ingredients = ["salmon", "tuna", "wasabi", "ebi", "tamago", "ikura"];
 
 let computerSequence = [];
+let playerSequence = [];
 
 // random computer sequence generator
 function randomIngredients() {
@@ -69,9 +60,15 @@ function randomIngredients() {
 randomIngredients();
 console.log(computerSequence);
 
-// player inputs
-let playerSequence = [];
+// how much player needs to earn
+// const day = 1;
+let currentEarningsNeeded = 15;
+// function moneyGenerator(currentDay, playerWinOrLose) {
+//   if (totalMoneyEarn === currentEarningsNeeded) {
+//   }
+// }
 
+// player inputs
 const userInput = document.addEventListener(
   "keydown",
   function (e) {
@@ -112,34 +109,6 @@ let totalMoneyEarn = 0;
 const refund = 15;
 const customerPays = 15;
 
-const targetCounter = document.querySelector("#ingame-earning");
-const targetResultCounter = document.querySelector(".total-earnings");
-// update counters
-function updateCounter() {
-  // counter during game
-  targetCounter.innerText = "$" + totalMoneyEarn + ".00";
-  // counter for result
-  targetResultCounter.innerText = "$" + totalMoneyEarn + ".00";
-}
-
-// how much player needs to earn
-const day = 1;
-let currentEarningsNeeded = 10;
-// function moneyGenerator(currentDay, playerWinOrLose) {
-//   if (totalMoneyEarn === currentEarningsNeeded) {
-//   }
-// }
-
-// check to see if player win or lose
-const winLoseOutput = document.querySelector(".outcome");
-function playerWinOrLose(totalEarning, totalNeeded) {
-  if (totalEarning >= totalNeeded) {
-    winLoseOutput.innerText = "You managed well! You can open again tomorrow.";
-    winLoseOutput.style.color = "#51a65e";
-    targetResultCounter.style.color = "#51a65e";
-  }
-}
-
 // check to see if player input is correct or not
 function submitDish(playerDish, computerDish) {
   if (playerDish.length !== computerDish.length) {
@@ -159,5 +128,25 @@ function submitDish(playerDish, computerDish) {
     updateCounter();
     playerSequence.length = 0;
     console.log(computerSequence);
+  }
+}
+
+const targetCounter = document.querySelector("#ingame-earning");
+const targetResultCounter = document.querySelector(".total-earnings");
+// update counters
+function updateCounter() {
+  // counter during game
+  targetCounter.innerText = "$" + totalMoneyEarn + ".00";
+  // counter for result
+  targetResultCounter.innerText = "$" + totalMoneyEarn + ".00";
+}
+
+// check to see if player win or lose
+const winLoseOutput = document.querySelector(".outcome");
+function playerWinOrLose(totalEarning, totalNeeded) {
+  if (totalEarning >= totalNeeded) {
+    winLoseOutput.innerText = "You managed well! You can open again tomorrow.";
+    winLoseOutput.style.color = "#51a65e";
+    targetResultCounter.style.color = "#51a65e";
   }
 }
