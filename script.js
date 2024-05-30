@@ -10,16 +10,26 @@
 // if player restarts same timer duration happens
 // if player continues timer with lesser duration happens
 
+// game state
+let game_Menu = "main menu";
+let game_Intro = "game instructions";
+let game_Conditions = "how much earnings needed";
+let game_Start = "timer starts";
+let game_End = "timer stops";
+let game_Restart = "replay same level again";
+let game_Continue = "play next level";
+let gameState = null;
+
 // display timer and result
 const timerElement = document.querySelector("#timer");
-const displayResult = document.querySelector("#result");
+const displayResult = document.querySelector("#result-window");
 displayResult.style.visibility = "hidden";
 
 // timer function (to change timer duration => change value of duration variable)
 let timerDisplay = setInterval(updateTimer, 1000);
 console.log("time starts");
 
-let duration = 60;
+let duration = 30;
 function updateTimer() {
   const minutes = Math.floor(duration / 60);
   let seconds = duration % 60;
@@ -37,11 +47,13 @@ function updateTimer() {
     duration = 0;
     displayResult.style.visibility = "visible";
     clearInterval(timerDisplay);
+    // winLoseOutput(totalMoneyEarn, day);
+    playerWinOrLose();
     console.log("times up");
   }
 }
 
-const ingredients = ["mushroom", "chicken", "kani", "ebi", "tamago", "kawaebi"];
+const ingredients = ["salmon", "tuna", "wasabi", "ebi", "tamago", "ikura"];
 
 let computerSequence = [];
 
@@ -63,20 +75,20 @@ let playerSequence = [];
 const userInput = document.addEventListener(
   "keydown",
   function (e) {
-    e.preventDefault();
+    // e.preventDefault();
 
-    if (e.code === "KeyW") {
-      playerSequence.push("mushroom");
-    } else if (e.code === "KeyA") {
-      playerSequence.push("chicken");
+    if (e.code === "KeyA") {
+      playerSequence.push("tuna");
+    } else if (e.code === "KeyW") {
+      playerSequence.push("salmon");
     } else if (e.code === "KeyD") {
-      playerSequence.push("kani");
+      playerSequence.push("wasabi");
     } else if (e.code === "KeyJ") {
       playerSequence.push("tamago");
     } else if (e.code === "KeyI") {
-      playerSequence.push("ebi");
+      playerSequence.push("ikura");
     } else if (e.code === "KeyL") {
-      playerSequence.push("kawaebi");
+      playerSequence.push("ebi");
     } else if (e.code === "Backspace") {
       playerSequence.length = 0;
       if (duration <= 5) {
@@ -100,16 +112,32 @@ let totalMoneyEarn = 0;
 const refund = 15;
 const customerPays = 15;
 
-// update counter
+// update counters
 function updateCounter() {
-  const targetCounter = document.querySelector("#counter");
+  // counter during game
+  const targetCounter = document.querySelector("#ingame-earning");
   targetCounter.innerText = "$" + totalMoneyEarn + ".00";
+
+  // counter for result
+  const targetResultCounter = document.querySelector(".total-earnings");
+  targetResultCounter.innerText = "$" + totalMoneyEarn + ".00";
 }
 
-// update pop up result counter
-function updateResultCounter() {
-  const targetResultCounter = document.querySelector(".player-earnings");
-  targetResultCounter.innerText = "$" + totalMoneyEarn + ".00";
+// how much player needs to earn
+const day = 1;
+const currentEarningsNeeded = 10;
+// function moneyGenerator(currentDay, playerWinOrLose) {
+//   if (totalMoneyEarn === currentEarningsNeeded) {
+//   }
+// }
+
+// check to see if player win or lose
+const winLoseOutput = document.querySelector(".outcome");
+function playerWinOrLose(totalEarning) {
+  if (totalEarning >= currentEarningsNeeded) {
+    winLoseOutput.innerText = "You managed well! You can open again tomorrow.";
+    winLoseOutput.style.color = "#e33030";
+  }
 }
 
 // check to see if player input is correct or not
@@ -117,21 +145,18 @@ function submitDish(playerDish, computerDish) {
   if (playerDish.length !== computerDish.length) {
     totalMoneyEarn -= refund;
     updateCounter();
-    updateResultCounter();
     return console.log("You made the wrong dish");
   } else {
     for (let i = 0; i < playerDish.length; i++) {
       if (playerDish[i] !== computerDish[i]) {
         totalMoneyEarn -= refund;
         updateCounter();
-        updateResultCounter();
         return console.log("You made the wrong dish");
       }
     }
     totalMoneyEarn += customerPays;
     randomIngredients();
     updateCounter();
-    updateResultCounter();
     playerSequence.length = 0;
     console.log(computerSequence);
   }

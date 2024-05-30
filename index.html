@@ -13,19 +13,42 @@
     <title>Maki Madness</title>
   </head>
   <body>
-    <div id="counter">$00.00</div>
+    <div id="counters">
+      <div id="day">Day: 1</div>
+      <div id="ingame-earning">$00.00</div>
+    </div>
+
     <div id="timer"></div>
-    <div id="result">
-      <h2>We are closed!</h2>
-      <div id="playercounter">
-        <p>You earned:</p>
-        <p class="player-earnings"></p>
+
+    <div class="belt">
+      <img src="assets/belt.svg" alt="" />
+      <div class="item-order">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
       </div>
+    </div>
+
+    <div id="result-window">
+      <h2>Today's earnings:</h2>
+      <div id="result">
+        <p class="total-earnings">$00.00</p>
+        <p class="outcome">Uh-oh! Game over. Time to close shop...</p>
+      </div>
+
       <div id="bottom-buttons">
         <button id="restart">restart</button>
         <button id="continue">continue</button>
       </div>
     </div>
+
+    <div id="visual-cues">
+      <img src="assets/visual_cues.svg" alt="" />
+    </div>
+
     <script src="script.js"></script>
   </body>
 </html>

@@ -1,9 +1,15 @@
 * {
   box-sizing: border-box;
+  font-family: rubik;
 }
 
 body {
-  background-color: #51a65e;
+  /* background-color: #51a65e; */
+  background-image: url(assets/bg.png);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: auto 0;
 }
 
 #timer {
@@ -16,30 +22,62 @@ body {
   border: 6px solid black;
   border-radius: 30px;
   font-size: 60px;
-  font-family: rubik;
   font-weight: 700;
-  margin: 50px auto;
+  margin: 15px auto;
 }
 
-#counter {
-  width: 300px;
-  height: 70px;
-  background-color: #efd34a;
-  border: 6px solid black;
-  border-radius: 20px;
-  line-height: 55px;
-  padding-left: 20px;
-  font-size: 40px;
-  font-family: rubik;
-  font-weight: 500;
+#counters {
   position: absolute;
-  margin: 0 70px;
+  margin: 10px 10px;
 }
 
-#result {
-  font-family: rubik;
-  height: 500px;
-  width: 1300px;
+#day {
+  width: 100px;
+  height: 55px;
+  background-color: #efd34a;
+  border: 3px solid black;
+  border-radius: 15px;
+  line-height: 50px;
+  padding-left: 10px;
+  font-size: 20px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+#ingame-earning {
+  width: 120px;
+  height: 55px;
+  background-color: #efd34a;
+  border: 3px solid black;
+  border-radius: 15px;
+  line-height: 50px;
+  padding-left: 10px;
+  font-size: 20px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.belt {
+  width: 100%;
+}
+
+.belt img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-order {
+  position: absolute;
+  display: grid;
+  background-color: #e35b30;
+  grid-template-columns: 100px 100px 100px;
+}
+
+#result-window {
+  height: 450px;
+  width: 900px;
   background-color: #f5f3e8;
   border: 6px solid black;
   border-radius: 60px;
@@ -47,32 +85,44 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  /* position: relative; */
+  position: absolute;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-#playercounter {
-  font-size: 80px;
+#result-window h2 {
+  font-size: 25px;
   font-weight: 500;
+  margin: 0;
+  height: 50px;
+  line-height: 50px;
+  text-decoration: underline;
+  position: relative;
+  bottom: 25px;
+}
+
+#result {
   text-align: center;
-  color: #e35b30;
+  color: #e33030;
   height: 150px;
   width: 100%;
+  position: relative;
+  bottom: 60px;
 }
 
-#playercounter p {
+.outcome {
+  font-size: 30px;
+  margin: 0;
+}
+
+.total-earnings {
+  font-size: 80px;
+  font-weight: 500;
   display: inline-block;
   margin: 0 auto;
-  text-decoration: underline;
-}
-
-#result h2 {
-  font-size: 100px;
-  font-weight: 500;
-  text-align: center;
-  margin: 25px;
-  height: 100px;
-  width: 100%;
-  line-height: 100px;
+  font-size: 150px;
 }
 
 #bottom-buttons {
@@ -80,7 +130,6 @@ body {
   justify-content: space-between;
   width: 60%;
   height: 60px;
-  /* position: absolute; */
   bottom: 40px;
 }
 
@@ -90,7 +139,21 @@ body {
   border: 5px solid black;
   border-radius: 20px;
   font-size: 30px;
-  font-family: rubik;
   font-weight: 500;
   width: 200px;
+}
+
+#controls {
+  height: 200px;
+  width: 100%;
+  background-color: #efd34a;
+  display: inline-flex;
+  justify-content: space-around;
+  align-items: end;
+  flex-wrap: wrap;
+}
+
+#visual-cues {
+  width: 70%;
+  margin: 50px auto;
 }
