@@ -29,7 +29,7 @@ displayResult.style.visibility = "hidden";
 let timerDisplay = setInterval(updateTimer, 1000);
 console.log("time starts");
 
-let duration = 30;
+let duration = 20;
 function updateTimer() {
   const minutes = Math.floor(duration / 60);
   let seconds = duration % 60;
@@ -48,7 +48,7 @@ function updateTimer() {
     displayResult.style.visibility = "visible";
     clearInterval(timerDisplay);
     // winLoseOutput(totalMoneyEarn, day);
-    playerWinOrLose();
+    playerWinOrLose(totalMoneyEarn, currentEarningsNeeded);
     console.log("times up");
   }
 }
@@ -112,20 +112,19 @@ let totalMoneyEarn = 0;
 const refund = 15;
 const customerPays = 15;
 
+const targetCounter = document.querySelector("#ingame-earning");
+const targetResultCounter = document.querySelector(".total-earnings");
 // update counters
 function updateCounter() {
   // counter during game
-  const targetCounter = document.querySelector("#ingame-earning");
   targetCounter.innerText = "$" + totalMoneyEarn + ".00";
-
   // counter for result
-  const targetResultCounter = document.querySelector(".total-earnings");
   targetResultCounter.innerText = "$" + totalMoneyEarn + ".00";
 }
 
 // how much player needs to earn
 const day = 1;
-const currentEarningsNeeded = 10;
+let currentEarningsNeeded = 10;
 // function moneyGenerator(currentDay, playerWinOrLose) {
 //   if (totalMoneyEarn === currentEarningsNeeded) {
 //   }
@@ -133,10 +132,11 @@ const currentEarningsNeeded = 10;
 
 // check to see if player win or lose
 const winLoseOutput = document.querySelector(".outcome");
-function playerWinOrLose(totalEarning) {
-  if (totalEarning >= currentEarningsNeeded) {
+function playerWinOrLose(totalEarning, totalNeeded) {
+  if (totalEarning >= totalNeeded) {
     winLoseOutput.innerText = "You managed well! You can open again tomorrow.";
-    winLoseOutput.style.color = "#e33030";
+    winLoseOutput.style.color = "#51a65e";
+    targetResultCounter.style.color = "#51a65e";
   }
 }
 
