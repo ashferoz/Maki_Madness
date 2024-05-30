@@ -10,50 +10,60 @@
 // if player restarts same timer duration happens
 // if player continues timer with lesser duration happens
 
-// start game
-function gameStart() {
-  let timerDisplay = setInterval(() => {
-    updateTimer(timerDisplay);
-    // console.log("interval running");
-  }, 1000);
-  console.log("time starts");
-
-  userInput();
-}
-
-// click start button
+// element selected
+const storeSfx = document.querySelector("#store-sfx");
 const startButton = document.querySelector(".start");
 const startWindow = document.querySelector(".start-window");
 const currentGoal = document.querySelector(".current-goal");
+const resultWindow = document.querySelector("#result-window");
+const continueButton = document.querySelector("#continue");
+const timerElement = document.querySelector("#timer");
+const displayResult = document.querySelector("#result-window");
+const goodSfx = document.querySelector("#good-sfx");
+const badSfx = document.querySelector("#bad-sfx");
+const mistakeSfx = document.querySelector("#mistake-sfx");
+const targetCounter = document.querySelector("#ingame-earning");
+const targetResultCounter = document.querySelector(".total-earnings");
+const winLoseOutput = document.querySelector(".outcome");
+
+// intro game display
+let timerDisplay;
+function introGameDisplay() {
+  timerDisplay = setInterval(() => {
+    updateTimer();
+    console.log("interval running");
+  }, 1000);
+  console.log("time starts");
+}
+
+// click start button
 startButton.addEventListener("click", function (e) {
-  gameStart();
+  introGameDisplay();
+  updateTimer();
+  userInput();
+  storeSfx.play();
   startWindow.style.visibility = "hidden";
 });
 
-// next round
-const resultWindow = document.querySelector("#result-window");
-const continueButton = document.querySelector("#continue");
+// next round window
 function continueButtonWorks() {
   continueButton.addEventListener("click", function (e) {
     resultWindow.style.visibility = "hidden";
     startWindow.style.visibility = "visible";
     currentGoal.innerText = "$" + currentEarningsNeeded + ".00";
-    gameStart();
     resetTimer();
   });
 }
 
 // display timer and result
-const timerElement = document.querySelector("#timer");
-const displayResult = document.querySelector("#result-window");
 displayResult.style.visibility = "hidden";
 
 // timer function (to change timer duration => change value of duration variable)
 function resetTimer() {
-  duration = 2 * 60;
-  updateTimer();
+  duration = 30;
 }
-let duration = 2 * 60;
+
+let duration = 30;
 function updateTimer() {
   const minutes = Math.floor(duration / 60);
   let seconds = duration % 60;
@@ -70,8 +80,8 @@ function updateTimer() {
   if (duration < 0) {
     duration = 0;
     displayResult.style.visibility = "visible";
-    clearInterval();
-    // winLoseOutput(totalMoneyEarn, day);
+    clearInterval(timerDisplay);
+    storeSfx.play();
     playerWinOrLose(totalMoneyEarn, currentEarningsNeeded);
     console.log("times up");
   }
@@ -118,6 +128,7 @@ function userInput() {
       } else if (e.code === "KeyL") {
         playerSequence.push("ebi");
       } else if (e.code === "Backspace") {
+        mistakeSfx.play();
         playerSequence.length = 0;
         if (duration <= 5) {
           duration = 0;
@@ -146,15 +157,18 @@ function submitDish(playerDish, computerDish) {
   if (playerDish.length !== computerDish.length) {
     totalMoneyEarn -= refund;
     updateCounter();
+    badSfx.play();
     return console.log("You made the wrong dish");
   } else {
     for (let i = 0; i < playerDish.length; i++) {
       if (playerDish[i] !== computerDish[i]) {
         totalMoneyEarn -= refund;
         updateCounter();
+        badSfx.play();
         return console.log("You made the wrong dish");
       }
     }
+    goodSfx.play();
     totalMoneyEarn += customerPays;
     randomIngredients();
     updateCounter();
@@ -164,8 +178,6 @@ function submitDish(playerDish, computerDish) {
 }
 
 // update counters
-const targetCounter = document.querySelector("#ingame-earning");
-const targetResultCounter = document.querySelector(".total-earnings");
 function updateCounter() {
   // counter during game
   targetCounter.innerText = "$" + totalMoneyEarn + ".00";
@@ -174,7 +186,6 @@ function updateCounter() {
 }
 
 // check to see if player win or lose
-const winLoseOutput = document.querySelector(".outcome");
 function playerWinOrLose(totalEarning, totalNeeded) {
   if (totalEarning >= totalNeeded) {
     winLoseOutput.innerText = "You managed well! You can open again tomorrow.";
