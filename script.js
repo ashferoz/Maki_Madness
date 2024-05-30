@@ -13,7 +13,10 @@
 // start game
 const startButton = document.querySelector(".start");
 startButton.addEventListener("click", function (e) {
-  let timerDisplay = setInterval(updateTimer, 1000);
+  let timerDisplay = setInterval(() => {
+    updateTimer(timerDisplay);
+    // console.log("interval running");
+  }, 1000);
   console.log("time starts");
 
   userInput();
@@ -29,8 +32,8 @@ displayResult.style.visibility = "hidden";
 
 // timer function (to change timer duration => change value of duration variable)
 
-let duration = 5;
-function updateTimer() {
+let duration = 30;
+function updateTimer(chicken) {
   const minutes = Math.floor(duration / 60);
   let seconds = duration % 60;
 
@@ -46,7 +49,7 @@ function updateTimer() {
   if (duration < 0) {
     duration = 0;
     displayResult.style.visibility = "visible";
-    clearInterval(timerDisplay);
+    clearInterval(chicken);
     // winLoseOutput(totalMoneyEarn, day);
     playerWinOrLose(totalMoneyEarn, currentEarningsNeeded);
     console.log("times up");
