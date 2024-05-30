@@ -50,6 +50,13 @@ body {
   border: 3px solid black;
   border-radius: 10px;
   font-size: 20px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: 0.2s font-size;
+}
+
+.start:hover {
+  background-color: #abffa2;
+  font-size: 22px;
 }
 
 #timer {
@@ -98,7 +105,7 @@ body {
 }
 
 .belt {
-  width: 100vw;
+  width: 100%;
   margin: 30px auto;
 }
 

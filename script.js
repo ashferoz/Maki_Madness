@@ -11,8 +11,7 @@
 // if player continues timer with lesser duration happens
 
 // start game
-const startButton = document.querySelector(".start");
-startButton.addEventListener("click", function (e) {
+function gameStart() {
   let timerDisplay = setInterval(() => {
     updateTimer(timerDisplay);
     // console.log("interval running");
@@ -20,10 +19,29 @@ startButton.addEventListener("click", function (e) {
   console.log("time starts");
 
   userInput();
+}
 
-  const startWindow = document.querySelector(".start-window");
+// click start button
+const startButton = document.querySelector(".start");
+const startWindow = document.querySelector(".start-window");
+const currentGoal = document.querySelector(".current-goal");
+startButton.addEventListener("click", function (e) {
+  gameStart();
   startWindow.style.visibility = "hidden";
 });
+
+// next round
+const resultWindow = document.querySelector("#result-window");
+const continueButton = document.querySelector("#continue");
+function continueButtonWorks() {
+  continueButton.addEventListener("click", function (e) {
+    resultWindow.style.visibility = "hidden";
+    startWindow.style.visibility = "visible";
+    currentGoal.innerText = "$" + currentEarningsNeeded + ".00";
+    gameStart();
+    resetTimer();
+  });
+}
 
 // display timer and result
 const timerElement = document.querySelector("#timer");
@@ -31,9 +49,12 @@ const displayResult = document.querySelector("#result-window");
 displayResult.style.visibility = "hidden";
 
 // timer function (to change timer duration => change value of duration variable)
-
-let duration = 30;
-function updateTimer(chicken) {
+function resetTimer() {
+  duration = 2 * 60;
+  updateTimer();
+}
+let duration = 2 * 60;
+function updateTimer() {
   const minutes = Math.floor(duration / 60);
   let seconds = duration % 60;
 
@@ -49,7 +70,7 @@ function updateTimer(chicken) {
   if (duration < 0) {
     duration = 0;
     displayResult.style.visibility = "visible";
-    clearInterval(chicken);
+    clearInterval();
     // winLoseOutput(totalMoneyEarn, day);
     playerWinOrLose(totalMoneyEarn, currentEarningsNeeded);
     console.log("times up");
@@ -74,12 +95,8 @@ randomIngredients();
 console.log(computerSequence);
 
 // how much player needs to earn
-// const day = 1;
+const day = 1;
 let currentEarningsNeeded = 15;
-// function moneyGenerator(currentDay, playerWinOrLose) {
-//   if (totalMoneyEarn === currentEarningsNeeded) {
-//   }
-// }
 
 // player inputs
 function userInput() {
@@ -146,9 +163,9 @@ function submitDish(playerDish, computerDish) {
   }
 }
 
+// update counters
 const targetCounter = document.querySelector("#ingame-earning");
 const targetResultCounter = document.querySelector(".total-earnings");
-// update counters
 function updateCounter() {
   // counter during game
   targetCounter.innerText = "$" + totalMoneyEarn + ".00";
@@ -163,5 +180,7 @@ function playerWinOrLose(totalEarning, totalNeeded) {
     winLoseOutput.innerText = "You managed well! You can open again tomorrow.";
     winLoseOutput.style.color = "#51a65e";
     targetResultCounter.style.color = "#51a65e";
+    currentEarningsNeeded += 60;
+    continueButtonWorks();
   }
 }
