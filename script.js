@@ -10,6 +10,9 @@
 // if player restarts same timer duration happens
 // if player continues timer with lesser duration happens
 
+//
+
+
 // display timer and result
 const timerElement = document.querySelector("#timer");
 const displayResult = document.querySelector("#result-window");

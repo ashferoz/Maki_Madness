@@ -12,6 +12,46 @@ body {
   margin: auto 0;
 }
 
+.start-window {
+  height: 300px;
+  width: 500px;
+  background-color: #f5f3e8;
+  border: 6px solid black;
+  border-radius: 60px;
+  margin: 0 auto;
+  position: absolute;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  text-align: center;
+}
+
+.current-day {
+  font-size: 30px;
+  font-weight: 400;
+  margin: 10px;
+  height: 50px;
+  line-height: 50px;
+  text-decoration: underline;
+}
+
+.current-goal {
+  font-size: 100px;
+  font-weight: 500;
+  margin: 40px;
+  height: 50px;
+  line-height: 50px;
+}
+
+.open {
+  background-color: #7ee074;
+  border: 3px solid black;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
 #timer {
   background-color: #e35b30;
   text-align: center;
@@ -78,7 +118,7 @@ body {
   display: grid;
   grid-template-columns: repeat(6, 6fr);
   grid-column-gap: 10px;
-  color:#e35b30;
+  color: #e35b30;
   text-align: center;
   font-size: 40px;
 }
