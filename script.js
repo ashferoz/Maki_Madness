@@ -1,4 +1,4 @@
-// --------- element selected ---------
+// --------- element called ---------
 const storeSfx = document.querySelector("#store-sfx");
 const buttonSfx = document.querySelector("#button-sfx");
 const bgm = document.querySelector("#bgm");
@@ -53,6 +53,7 @@ startButton.addEventListener("click", function (e) {
   storeSfx.play();
   buttonSfx.play();
   bgm.play();
+  randomIngredients();
   startWindow.style.visibility = "hidden";
 });
 
@@ -125,7 +126,6 @@ function randomIngredients() {
   }
 }
 
-randomIngredients();
 console.log(computerSequence);
 
 document.addEventListener("keydown", function (e) {
@@ -223,6 +223,16 @@ function playerWinOrLose(totalEarning, totalNeeded) {
     day++;
     totalMoneyEarn = 0;
     continueButtonWorks();
+    continueButton.style.background = "#efd34a";
+    continueButton.addEventListener("mouseover", () => {
+      // Change the button's background color
+      continueButton.style.fontSize = "33px";
+      continueButton.style.background = "#ffed91";
+    });
+    continueButton.addEventListener("mouseout", () => {
+      continueButton.style.fontSize = "30px";
+      continueButton.style.background = "#efd34a";
+    });
   } else if (totalEarning < totalNeeded) {
     winLoseOutput.innerText = "Uh-oh! Game over. Time to close shop...";
     winLoseOutput.style.color = "#e33030";
