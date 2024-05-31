@@ -8,6 +8,7 @@ const currentGoal = document.querySelector(".current-goal");
 const currentDay = document.querySelector(".current-day");
 const resultWindow = document.querySelector("#result-window");
 const continueButton = document.querySelector("#continue");
+const restartButton = document.querySelector("#restart");
 const timerElement = document.querySelector("#timer");
 const displayResult = document.querySelector("#result-window");
 const goodSfx = document.querySelector("#good-sfx");
@@ -30,7 +31,6 @@ let timerDisplay = null;
 function introGameDisplay() {
   timerDisplay = setInterval(() => {
     updateTimer();
-    console.log("interval running");
   }, 1000);
   console.log("time starts");
 }
@@ -41,18 +41,35 @@ startButton.addEventListener("click", function (e) {
   updateTimer();
   playerCanInput = true;
   storeSfx.play();
+  buttonSfx.play();
   bgm.play();
   startWindow.style.visibility = "hidden";
 });
 
 // next round window
+// continue button
 function continueButtonWorks() {
   continueButton.addEventListener("click", function (e) {
     resultWindow.style.visibility = "hidden";
     startWindow.style.visibility = "visible";
     currentGoal.innerText = "$" + currentEarningsNeeded + ".00";
     currentDay.innerText = "Day " + day;
+    buttonSfx.play();
     updateDayCounter();
+    updateMoneyCounter();
+    duration = 30;
+  });
+}
+// restart button
+function restartButtonWorks() {
+  restartButton.addEventListener("click", function (e) {
+    resultWindow.style.visibility = "hidden";
+    startWindow.style.visibility = "visible";
+    currentGoal.innerText = "$" + currentEarningsNeeded + ".00";
+    currentDay.innerText = "Day " + day;
+    buttonSfx.play();
+    updateDayCounter();
+    updateMoneyCounter();
     duration = 30;
   });
 }
@@ -76,12 +93,12 @@ function updateTimer() {
   duration--;
 
   if (duration < 0) {
+    playerWinOrLose(totalMoneyEarn, currentEarningsNeeded);
     duration = 0;
     displayResult.style.visibility = "visible";
     clearInterval(timerDisplay);
     playerCanInput = false;
     storeSfx.play();
-    playerWinOrLose(totalMoneyEarn, currentEarningsNeeded);
     console.log("times up");
   }
 }
@@ -140,7 +157,6 @@ function handleUserInput(e) {
   console.log(playerSequence);
 }
 
-
 // player earnings
 let totalMoneyEarn = 0;
 const refund = 15;
@@ -197,8 +213,23 @@ function playerWinOrLose(totalEarning, totalNeeded) {
     winLoseOutput.innerText = "You managed well! You can open again tomorrow.";
     winLoseOutput.style.color = "#51a65e";
     targetResultCounter.style.color = "#51a65e";
-    currentEarningsNeeded += 60;
+    currentEarningsNeeded += 15;
     day++;
+    totalMoneyEarn = 0;
     continueButtonWorks();
+  } else if (totalEarning < totalNeeded) {
+    winLoseOutput.innerText = "Uh-oh! Game over. Time to close shop...";
+    winLoseOutput.style.color = "#e33030";
+    targetResultCounter.style.color = "#e33030";
+    totalMoneyEarn = 0;
+    continueButton.style.background = "#e33030";
+    continueButton.addEventListener("mouseover", () => {
+      // Change the button's background color
+      continueButton.style.fontSize = "30px";
+    });
+    continueButton.addEventListener("mouseout", () => {
+      continueButton.style.fontSize = "30px";
+    });
+    restartButtonWorks();
   }
 }

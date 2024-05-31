@@ -104,9 +104,6 @@ body {
 .belt {
   width: 100%;
   margin: 0px auto;
-  /* display: flex;
-  flex-wrap: wrap; */
-  /* flex-direction: column; */
   height: 350px;
 }
 
@@ -128,7 +125,6 @@ body {
   grid-template-columns: repeat(6, 6fr);
   grid-column-gap: 10px;
   color: #e35b30;
-  
 }
 
 .item-order p {
@@ -144,7 +140,6 @@ body {
 }
 
 .item-order img {
-  /* align-content: center; */
   width: 15%;
   margin: 0px 15px;
 }
@@ -202,7 +197,7 @@ body {
 #bottom-buttons {
   display: inline-flex;
   justify-content: space-between;
-  width: 60%;
+  width: 50%;
   height: 60px;
   bottom: 40px;
 }
@@ -215,6 +210,14 @@ body {
   font-size: 30px;
   font-weight: 500;
   width: 200px;
+  transition: 0.2s font-size;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#continue:hover,
+#restart:hover {
+  background-color: #ffed91;
+  font-size: 33px;
 }
 
 #visual-cues {
