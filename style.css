@@ -4,11 +4,8 @@
 }
 
 body {
-  /* background-color: #51a65e; */
   background-image: url(assets/bg.png);
   height: 100vh;
-  display: flex;
-  flex-direction: column;
   margin: auto 0;
 }
 
@@ -70,12 +67,12 @@ body {
   border-radius: 30px;
   font-size: 60px;
   font-weight: 700;
-  margin: 15px auto;
+  margin: 30px auto;
 }
 
 #counters {
   position: absolute;
-  margin: 10px 10px;
+  margin: -10px 10px;
 }
 
 #day {
@@ -106,7 +103,11 @@ body {
 
 .belt {
   width: 100%;
-  margin: 30px auto;
+  margin: 0px auto;
+  /* display: flex;
+  flex-wrap: wrap; */
+  /* flex-direction: column; */
+  height: 350px;
 }
 
 .belt img {
@@ -114,14 +115,15 @@ body {
   position: absolute;
   width: 100vw;
   object-fit: cover;
+  margin: 0 auto;
 }
 
 .item-order {
   position: relative;
   margin: 0 auto;
-  height: 200px;
+  height: 300px;
   width: 95vw;
-  top: 40px;
+  top: 30px;
   display: grid;
   grid-template-columns: repeat(6, 6fr);
   grid-column-gap: 10px;
@@ -131,7 +133,7 @@ body {
 }
 
 .item-order p {
-  margin: 0 auto;
+  margin: 10px auto;
   height: 50px;
   line-height: 40px;
   width: 100px;
@@ -141,35 +143,12 @@ body {
   font-size: 30px;
 }
 
-.item-1 img {
+.item-order img {
+  /* align-content: center; */
   width: 15%;
-  margin: 0 auto;
+  margin: 0px 15px;
 }
 
-.item-2 img {
-  width: 15%;
-  margin: 0 auto;
-}
-
-.item-3 img {
-  width: 15%;
-  margin: 0 auto;
-}
-
-.item-4 img {
-  width: 15%;
-  margin: 0 auto;
-}
-
-.item-5 img {
-  width: 15%;
-  margin: 0 auto;
-}
-
-.item-6 img {
-  width: 15%;
-  margin: 0 auto;
-}
 
 #result-window {
   height: 450px;
@@ -241,5 +220,5 @@ body {
 
 #visual-cues {
   width: 70%;
-  margin: 100px auto;
+  margin: 0px auto;
 }
