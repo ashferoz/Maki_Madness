@@ -15,14 +15,17 @@ const storeSfx = document.querySelector("#store-sfx");
 const startButton = document.querySelector(".start");
 const startWindow = document.querySelector(".start-window");
 const currentGoal = document.querySelector(".current-goal");
+const currentDay = document.querySelector(".current-day");
 const resultWindow = document.querySelector("#result-window");
 const continueButton = document.querySelector("#continue");
 const timerElement = document.querySelector("#timer");
 const displayResult = document.querySelector("#result-window");
 const goodSfx = document.querySelector("#good-sfx");
 const badSfx = document.querySelector("#bad-sfx");
+const cashSfx = document.querySelector("#cash-sfx");
 const mistakeSfx = document.querySelector("#mistake-sfx");
-const targetCounter = document.querySelector("#ingame-earning");
+const targetMoneyCounter = document.querySelector("#ingame-earning");
+const targetDayCounter = document.querySelector("#day");
 const targetResultCounter = document.querySelector(".total-earnings");
 const winLoseOutput = document.querySelector(".outcome");
 
@@ -51,6 +54,8 @@ function continueButtonWorks() {
     resultWindow.style.visibility = "hidden";
     startWindow.style.visibility = "visible";
     currentGoal.innerText = "$" + currentEarningsNeeded + ".00";
+    currentDay.innerText = "Day " + day;
+    updateDayCounter();
     resetTimer();
   });
 }
@@ -104,10 +109,6 @@ function randomIngredients() {
 randomIngredients();
 console.log(computerSequence);
 
-// how much player needs to earn
-const day = 1;
-let currentEarningsNeeded = 15;
-
 // player inputs
 function userInput() {
   document.addEventListener(
@@ -152,37 +153,49 @@ let totalMoneyEarn = 0;
 const refund = 15;
 const customerPays = 15;
 
+// how much player needs to earn
+let day = 1;
+let currentEarningsNeeded = 15;
+
 // check to see if player input is correct or not
 function submitDish(playerDish, computerDish) {
   if (playerDish.length !== computerDish.length) {
     totalMoneyEarn -= refund;
-    updateCounter();
+    updateMoneyCounter();
     badSfx.play();
     return console.log("You made the wrong dish");
   } else {
     for (let i = 0; i < playerDish.length; i++) {
       if (playerDish[i] !== computerDish[i]) {
         totalMoneyEarn -= refund;
-        updateCounter();
+        updateMoneyCounter();
         badSfx.play();
         return console.log("You made the wrong dish");
       }
     }
+    cashSfx.play();
     goodSfx.play();
     totalMoneyEarn += customerPays;
     randomIngredients();
-    updateCounter();
+    updateMoneyCounter();
     playerSequence.length = 0;
     console.log(computerSequence);
   }
 }
 
 // update counters
-function updateCounter() {
+function updateMoneyCounter() {
   // counter during game
-  targetCounter.innerText = "$" + totalMoneyEarn + ".00";
+  targetMoneyCounter.innerText = "$" + totalMoneyEarn + ".00";
   // counter for result
   targetResultCounter.innerText = "$" + totalMoneyEarn + ".00";
+}
+
+function updateDayCounter() {
+  // counter during game
+  targetDayCounter.innerText = "Day: " + day;
+  // counter for result
+  targetResultCounter.innerText = "$" + totalMoneyEarn;
 }
 
 // check to see if player win or lose
@@ -192,6 +205,7 @@ function playerWinOrLose(totalEarning, totalNeeded) {
     winLoseOutput.style.color = "#51a65e";
     targetResultCounter.style.color = "#51a65e";
     currentEarningsNeeded += 60;
+    day++;
     continueButtonWorks();
   }
 }
