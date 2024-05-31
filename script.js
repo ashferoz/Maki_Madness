@@ -20,13 +20,23 @@ const targetDayCounter = document.querySelector("#day");
 const targetResultCounter = document.querySelector(".total-earnings");
 const winLoseOutput = document.querySelector(".outcome");
 
-const ingredients = ["salmon", "tuna", "wasabi", "ebi", "tamago", "ikura"];
-
 let computerSequence = [];
 let playerSequence = [];
 let playerCanInput = false;
 
+// player earnings
+let totalMoneyEarn = 0;
+const refund = 15;
+const customerPays = 15;
+
+// how much player needs to earn
+let day = 1;
+let currentEarningsNeeded = 30;
+
+const ingredients = ["salmon", "tuna", "wasabi", "ebi", "tamago", "ikura"];
+
 // intro game display
+currentGoal.innerText = "$" + currentEarningsNeeded + ".00";
 let timerDisplay = null;
 function introGameDisplay() {
   timerDisplay = setInterval(() => {
@@ -110,8 +120,11 @@ function randomIngredients() {
     const getRandomIngredient =
       ingredients[Math.floor(Math.random() * ingredients.length)];
     computerSequence.push(getRandomIngredient);
+    const itemOrder = document.querySelector(`.comp-${i + 1}`);
+    itemOrder.innerText = getRandomIngredient;
   }
 }
+
 randomIngredients();
 console.log(computerSequence);
 
@@ -157,29 +170,22 @@ function handleUserInput(e) {
   console.log(playerSequence);
 }
 
-// player earnings
-let totalMoneyEarn = 0;
-const refund = 15;
-const customerPays = 15;
-
-// how much player needs to earn
-let day = 1;
-let currentEarningsNeeded = 15;
-
 // check to see if player input is correct or not
 function submitDish(playerDish, computerDish) {
   if (playerDish.length !== computerDish.length) {
     totalMoneyEarn -= refund;
     updateMoneyCounter();
     badSfx.play();
-    return console.log("You made the wrong dish");
+    playerSequence.length = 0;
+    return;
   } else {
     for (let i = 0; i < playerDish.length; i++) {
       if (playerDish[i] !== computerDish[i]) {
         totalMoneyEarn -= refund;
         updateMoneyCounter();
         badSfx.play();
-        return console.log("You made the wrong dish");
+        playerSequence.length = 0;
+        return;
       }
     }
     cashSfx.play();
@@ -222,7 +228,7 @@ function playerWinOrLose(totalEarning, totalNeeded) {
     winLoseOutput.style.color = "#e33030";
     targetResultCounter.style.color = "#e33030";
     totalMoneyEarn = 0;
-    continueButton.style.background = "#e33030";
+    continueButton.style.background = "#373737";
     continueButton.addEventListener("mouseover", () => {
       // Change the button's background color
       continueButton.style.fontSize = "30px";
