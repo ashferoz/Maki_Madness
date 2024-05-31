@@ -19,11 +19,14 @@ const targetMoneyCounter = document.querySelector("#ingame-earning");
 const targetDayCounter = document.querySelector("#day");
 const targetResultCounter = document.querySelector(".total-earnings");
 const winLoseOutput = document.querySelector(".outcome");
+const guideWindow = document.querySelector(".guide-window");
 
 let computerSequence = [];
 let playerSequence = [];
 let playerCanInput = false;
 let currentIndex = 0;
+let isGuideWindowVisible = false;
+guideWindow.style.visibility = "hidden";
 
 // player earnings
 let totalMoneyEarn = 0;
@@ -130,6 +133,16 @@ function randomIngredients() {
 }
 
 document.addEventListener("keydown", function (e) {
+  if (e.code === "KeyH") {
+    buttonSfx.play();
+    if (isGuideWindowVisible) {
+      guideWindow.style.visibility = "hidden"; 
+    } else {
+      guideWindow.style.visibility = "visible"; 
+    }
+  
+    isGuideWindowVisible = !isGuideWindowVisible;
+  }
   if (playerCanInput === true) {
     handleUserInput(e);
   }
