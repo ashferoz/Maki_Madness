@@ -158,11 +158,12 @@ function handleUserInput(e) {
     buttonSfx.play();
     playerSequence.push("ebi");
     imageOfInput("assets/ebi.svg", currentIndex++);
-  } else if (e.code === "Backspace") {
+  } if (e.code === "Backspace") {
     currentIndex = 0;
     mistakeSfx.play();
     playerSequence.length = 0;
-    imageOfInput("");
+    // Remove images
+    document.querySelectorAll(".dish-image").forEach(img => img.remove());
     if (duration <= 5) {
       duration = 0;
     } else {
@@ -171,19 +172,23 @@ function handleUserInput(e) {
   } else if (e.code === "Enter") {
     submitDish(playerSequence, computerSequence);
     currentIndex = 0;
-    imageOfInput("");
+    // Remove images
+    document.querySelectorAll(".dish-image").forEach(img => img.remove());
   } else {
-    return;
+    if (playerCanInput === true) {
+      handleValidUserInput(e);
+    }
+  
   }
 }
 
-
-
 function imageOfInput(playerDish, index) {
   const dishSelected = document.querySelector(`.item-${index + 1}`);
+  // Remove previous image if exists
+  dishSelected.querySelectorAll("img").forEach(img => img.remove());
   const dishImage = document.createElement("img");
   dishImage.src = playerDish;
-  dishImage.alt = "Dish Image";
+  dishImage.classList.add("dish-image"); // Add a class to identify these images for removal
   dishSelected.append(dishImage);
 }
 
