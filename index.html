@@ -14,8 +14,6 @@
     <title>Maki Madness</title>
   </head>
   <body>
-    <!-- <button class="bgm-button">music</button> -->
-
     <div class="start-window">
       <h2 class="current-day">Day 1</h2>
       <h3>Today's goal is</h3>
@@ -33,27 +31,27 @@
       <img src="assets/belt.svg" alt="" />
       <div class="item-order">
         <div class="item-1">
-          <p>1</p>
+          <p class="comp-1">ebi</p>
           <img src="assets/ebi.svg" alt="" />
         </div>
         <div class="item-2">
-          <p>2</p>
+          <p class="comp-2">ikura</p>
           <img src="assets/ikura.svg" alt="" />
         </div>
         <div class="item-3">
-          <p>3</p>
+          <p class="comp-3">wasabi</p>
           <img src="assets/wasabi.svg" alt="" />
         </div>
         <div class="item-4">
-          <p>4</p>
+          <p class="comp-4">tuna</p>
           <img src="assets/tuna.svg" alt="" />
         </div>
         <div class="item-5">
-          <p>5</p>
+          <p class="comp-5">tamago</p>
           <img src="assets/tamago.svg" alt="" />
         </div>
         <div class="item-6">
-          <p>6</p>
+          <p class="comp-6">salmon</p>
           <img src="assets/salmon.svg" alt="" />
         </div>
       </div>
@@ -106,6 +104,17 @@
 
     <audio id="cash-sfx">
       <source src="/assets/75235__creek23__cha-ching.wav" type="audio/wav" />
+    </audio>
+
+    <audio id="button-sfx">
+      <source
+        src="/assets/268108__nenadsimic__button-tick.wav"
+        type="audio/wav"
+      />
+    </audio>
+
+    <audio id="bgm" controls loop>
+      <source src="assets/game-music-loop-20-156390.mp3" type="audio/wav" />
     </audio>
 
     <script src="script.js"></script>

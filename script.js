@@ -1,17 +1,7 @@
-// 1. let player know what is the earning goal for the day, timer display for 3 seconds
-// 1. timer starts
-// 2. ingredient sequence prompt from game
-// 3. player key in sequence of ingredients
-// 4. if correct order of sequence => money counter adds $5 => player input clears => step 2
-// 5. if wrong order of sequence => player input vibrates? or change colour? player input clears
-// 6. timer stops
-// 7. show how much money player earns, restart button, continue button, main menu button
-// 8. if player lose continue button is disabled, player can only restart or go back to main menu
-// if player restarts same timer duration happens
-// if player continues timer with lesser duration happens
-
-// element selected
+// --------- element selected ---------
 const storeSfx = document.querySelector("#store-sfx");
+const buttonSfx = document.querySelector("#button-sfx");
+const bgm = document.querySelector("#bgm");
 const startButton = document.querySelector(".start");
 const startWindow = document.querySelector(".start-window");
 const currentGoal = document.querySelector(".current-goal");
@@ -29,8 +19,14 @@ const targetDayCounter = document.querySelector("#day");
 const targetResultCounter = document.querySelector(".total-earnings");
 const winLoseOutput = document.querySelector(".outcome");
 
+const ingredients = ["salmon", "tuna", "wasabi", "ebi", "tamago", "ikura"];
+
+let computerSequence = [];
+let playerSequence = [];
+let playerCanInput = false;
+
 // intro game display
-let timerDisplay;
+let timerDisplay = null;
 function introGameDisplay() {
   timerDisplay = setInterval(() => {
     updateTimer();
@@ -43,8 +39,9 @@ function introGameDisplay() {
 startButton.addEventListener("click", function (e) {
   introGameDisplay();
   updateTimer();
-  userInput();
+  playerCanInput = true;
   storeSfx.play();
+  bgm.play();
   startWindow.style.visibility = "hidden";
 });
 
@@ -56,7 +53,7 @@ function continueButtonWorks() {
     currentGoal.innerText = "$" + currentEarningsNeeded + ".00";
     currentDay.innerText = "Day " + day;
     updateDayCounter();
-    resetTimer();
+    duration = 30;
   });
 }
 
@@ -64,10 +61,6 @@ function continueButtonWorks() {
 displayResult.style.visibility = "hidden";
 
 // timer function (to change timer duration => change value of duration variable)
-function resetTimer() {
-  duration = 30;
-}
-
 let duration = 30;
 function updateTimer() {
   const minutes = Math.floor(duration / 60);
@@ -86,16 +79,12 @@ function updateTimer() {
     duration = 0;
     displayResult.style.visibility = "visible";
     clearInterval(timerDisplay);
+    playerCanInput = false;
     storeSfx.play();
     playerWinOrLose(totalMoneyEarn, currentEarningsNeeded);
     console.log("times up");
   }
 }
-
-const ingredients = ["salmon", "tuna", "wasabi", "ebi", "tamago", "ikura"];
-
-let computerSequence = [];
-let playerSequence = [];
 
 // random computer sequence generator
 function randomIngredients() {
@@ -109,44 +98,48 @@ function randomIngredients() {
 randomIngredients();
 console.log(computerSequence);
 
-// player inputs
-function userInput() {
-  document.addEventListener(
-    "keydown",
-    function (e) {
-      // e.preventDefault();
+document.addEventListener("keydown", function (e) {
+  if (playerCanInput === true) {
+    handleUserInput(e);
+  }
+});
 
-      if (e.code === "KeyA") {
-        playerSequence.push("tuna");
-      } else if (e.code === "KeyW") {
-        playerSequence.push("salmon");
-      } else if (e.code === "KeyD") {
-        playerSequence.push("wasabi");
-      } else if (e.code === "KeyJ") {
-        playerSequence.push("tamago");
-      } else if (e.code === "KeyI") {
-        playerSequence.push("ikura");
-      } else if (e.code === "KeyL") {
-        playerSequence.push("ebi");
-      } else if (e.code === "Backspace") {
-        mistakeSfx.play();
-        playerSequence.length = 0;
-        if (duration <= 5) {
-          duration = 0;
-        } else {
-          duration -= 5;
-        }
-      } else if (e.code === "Enter") {
-        submitDish(playerSequence, computerSequence);
-      } else {
-        return;
-      }
+function handleUserInput(e) {
+  if (e.code === "KeyA") {
+    playerSequence.push("tuna");
+    buttonSfx.play();
+  } else if (e.code === "KeyW") {
+    buttonSfx.play();
+    playerSequence.push("salmon");
+  } else if (e.code === "KeyD") {
+    buttonSfx.play();
+    playerSequence.push("wasabi");
+  } else if (e.code === "KeyJ") {
+    buttonSfx.play();
+    playerSequence.push("tamago");
+  } else if (e.code === "KeyI") {
+    buttonSfx.play();
+    playerSequence.push("ikura");
+  } else if (e.code === "KeyL") {
+    buttonSfx.play();
+    playerSequence.push("ebi");
+  } else if (e.code === "Backspace") {
+    mistakeSfx.play();
+    playerSequence.length = 0;
+    if (duration <= 5) {
+      duration = 0;
+    } else {
+      duration -= 5;
+    }
+  } else if (e.code === "Enter") {
+    submitDish(playerSequence, computerSequence);
+  } else {
+    return;
+  }
 
-      console.log(playerSequence);
-    },
-    true
-  );
+  console.log(playerSequence);
 }
+
 
 // player earnings
 let totalMoneyEarn = 0;

@@ -128,8 +128,7 @@ body {
   grid-template-columns: repeat(6, 6fr);
   grid-column-gap: 10px;
   color: #e35b30;
-  text-align: center;
-  font-size: 40px;
+  
 }
 
 .item-order p {
@@ -140,7 +139,8 @@ body {
   background-color: #f5f3e8;
   border: 5px solid black;
   border-radius: 20px;
-  font-size: 30px;
+  font-size: 20px;
+  text-align: center;
 }
 
 .item-order img {
@@ -148,7 +148,6 @@ body {
   width: 15%;
   margin: 0px 15px;
 }
-
 
 #result-window {
   height: 450px;
