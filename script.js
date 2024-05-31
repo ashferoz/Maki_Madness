@@ -23,6 +23,7 @@ const winLoseOutput = document.querySelector(".outcome");
 let computerSequence = [];
 let playerSequence = [];
 let playerCanInput = false;
+let currentIndex = 0;
 
 // player earnings
 let totalMoneyEarn = 0;
@@ -54,6 +55,9 @@ startButton.addEventListener("click", function (e) {
   bgm.play();
   randomIngredients();
   startWindow.style.visibility = "hidden";
+  currentIndex = 0;
+  document.querySelectorAll(".dish-image").forEach((img) => img.remove());
+  playerSequence.length = 0;
 });
 
 // next round window
@@ -109,6 +113,7 @@ function updateTimer() {
     clearInterval(timerDisplay);
     playerCanInput = false;
     storeSfx.play();
+    document.querySelectorAll(".dish-image").forEach((img) => img.remove());
   }
 }
 
@@ -129,8 +134,6 @@ document.addEventListener("keydown", function (e) {
     handleUserInput(e);
   }
 });
-
-let currentIndex = 0;
 
 function handleUserInput(e) {
   if (e.code === "KeyA") {
@@ -158,12 +161,13 @@ function handleUserInput(e) {
     buttonSfx.play();
     playerSequence.push("ebi");
     imageOfInput("assets/ebi.svg", currentIndex++);
-  } if (e.code === "Backspace") {
+  }
+  if (e.code === "Backspace") {
     currentIndex = 0;
     mistakeSfx.play();
     playerSequence.length = 0;
     // Remove images
-    document.querySelectorAll(".dish-image").forEach(img => img.remove());
+    document.querySelectorAll(".dish-image").forEach((img) => img.remove());
     if (duration <= 5) {
       duration = 0;
     } else {
@@ -173,22 +177,20 @@ function handleUserInput(e) {
     submitDish(playerSequence, computerSequence);
     currentIndex = 0;
     // Remove images
-    document.querySelectorAll(".dish-image").forEach(img => img.remove());
-  } else {
-    if (playerCanInput === true) {
-      handleValidUserInput(e);
-    }
-  
+    document.querySelectorAll(".dish-image").forEach((img) => img.remove());
   }
+  console.log(playerSequence);
 }
 
+// add image based on player inputs
 function imageOfInput(playerDish, index) {
   const dishSelected = document.querySelector(`.item-${index + 1}`);
   // Remove previous image if exists
-  dishSelected.querySelectorAll("img").forEach(img => img.remove());
+  dishSelected.querySelectorAll("img").forEach((img) => img.remove());
   const dishImage = document.createElement("img");
   dishImage.src = playerDish;
-  dishImage.classList.add("dish-image"); // Add a class to identify these images for removal
+  // Add a class to identify these images for removal
+  dishImage.classList.add("dish-image");
   dishSelected.append(dishImage);
 }
 
