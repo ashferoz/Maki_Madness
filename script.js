@@ -42,7 +42,6 @@ function introGameDisplay() {
   timerDisplay = setInterval(() => {
     updateTimer();
   }, 1000);
-  console.log("time starts");
 }
 
 // click start button
@@ -110,7 +109,6 @@ function updateTimer() {
     clearInterval(timerDisplay);
     playerCanInput = false;
     storeSfx.play();
-    console.log("times up");
   }
 }
 
@@ -126,36 +124,45 @@ function randomIngredients() {
   }
 }
 
-console.log(computerSequence);
-
 document.addEventListener("keydown", function (e) {
   if (playerCanInput === true) {
     handleUserInput(e);
   }
 });
 
+let currentIndex = 0;
+
 function handleUserInput(e) {
   if (e.code === "KeyA") {
     playerSequence.push("tuna");
     buttonSfx.play();
+    imageOfInput("assets/tuna.svg", currentIndex++);
   } else if (e.code === "KeyW") {
     buttonSfx.play();
+
     playerSequence.push("salmon");
+    imageOfInput("assets/salmon.svg", currentIndex++);
   } else if (e.code === "KeyD") {
     buttonSfx.play();
     playerSequence.push("wasabi");
+    imageOfInput("assets/wasabi.svg", currentIndex++);
   } else if (e.code === "KeyJ") {
     buttonSfx.play();
     playerSequence.push("tamago");
+    imageOfInput("assets/tamago.svg", currentIndex++);
   } else if (e.code === "KeyI") {
     buttonSfx.play();
     playerSequence.push("ikura");
+    imageOfInput("assets/ikura.svg", currentIndex++);
   } else if (e.code === "KeyL") {
     buttonSfx.play();
     playerSequence.push("ebi");
+    imageOfInput("assets/ebi.svg", currentIndex++);
   } else if (e.code === "Backspace") {
+    currentIndex = 0;
     mistakeSfx.play();
     playerSequence.length = 0;
+    imageOfInput("");
     if (duration <= 5) {
       duration = 0;
     } else {
@@ -163,11 +170,21 @@ function handleUserInput(e) {
     }
   } else if (e.code === "Enter") {
     submitDish(playerSequence, computerSequence);
+    currentIndex = 0;
+    imageOfInput("");
   } else {
     return;
   }
+}
 
-  console.log(playerSequence);
+
+
+function imageOfInput(playerDish, index) {
+  const dishSelected = document.querySelector(`.item-${index + 1}`);
+  const dishImage = document.createElement("img");
+  dishImage.src = playerDish;
+  dishImage.alt = "Dish Image";
+  dishSelected.append(dishImage);
 }
 
 // check to see if player input is correct or not
@@ -194,7 +211,6 @@ function submitDish(playerDish, computerDish) {
     randomIngredients();
     updateMoneyCounter();
     playerSequence.length = 0;
-    console.log(computerSequence);
   }
 }
 
