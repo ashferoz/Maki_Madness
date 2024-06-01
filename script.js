@@ -1,4 +1,4 @@
-// --------- element called ---------
+// --------- element selector ---------
 const storeSfx = document.querySelector("#store-sfx");
 const buttonSfx = document.querySelector("#button-sfx");
 const bgm = document.querySelector("#bgm");
@@ -21,128 +21,37 @@ const targetResultCounter = document.querySelector(".total-earnings");
 const winLoseOutput = document.querySelector(".outcome");
 const guideWindow = document.querySelector(".guide-window");
 
+// --------- global variables and starting state of game ---------
 let computerSequence = [];
 let playerSequence = [];
 let playerCanInput = false;
 let currentIndex = 0;
+let duration = 30;
 let isGuideWindowVisible = false;
 guideWindow.style.visibility = "hidden";
-
+displayResult.style.visibility = "hidden";
 // player earnings
 let totalMoneyEarn = 0;
 const refund = 15;
 const customerPays = 15;
-
 // how much player needs to earn
 let day = 1;
 let currentEarningsNeeded = 30;
-
 const ingredients = ["salmon", "tuna", "wasabi", "ebi", "tamago", "ikura"];
 
-// intro game display
-currentGoal.innerText = "$" + currentEarningsNeeded + ".00";
-let timerDisplay = null;
-function introGameDisplay() {
-  timerDisplay = setInterval(() => {
-    updateTimer();
-  }, 1000);
-}
-
-// click start button
-startButton.addEventListener("click", function (e) {
-  introGameDisplay();
-  updateTimer();
-  playerCanInput = true;
-  storeSfx.play();
-  buttonSfx.play();
-  bgm.play();
-  randomIngredients();
-  startWindow.style.visibility = "hidden";
-  currentIndex = 0;
-  document.querySelectorAll(".dish-image").forEach((img) => img.remove());
-  playerSequence.length = 0;
-});
-
-// next round window
-// continue button
-function continueButtonWorks() {
-  continueButton.addEventListener("click", function (e) {
-    resultWindow.style.visibility = "hidden";
-    startWindow.style.visibility = "visible";
-    currentGoal.innerText = "$" + currentEarningsNeeded + ".00";
-    currentDay.innerText = "Day " + day;
-    buttonSfx.play();
-    updateDayCounter();
-    updateMoneyCounter();
-    duration = 30;
-  });
-}
-// restart button
-function restartButtonWorks() {
-  restartButton.addEventListener("click", function (e) {
-    resultWindow.style.visibility = "hidden";
-    startWindow.style.visibility = "visible";
-    currentGoal.innerText = "$" + currentEarningsNeeded + ".00";
-    currentDay.innerText = "Day " + day;
-    buttonSfx.play();
-    updateDayCounter();
-    updateMoneyCounter();
-    duration = 30;
-  });
-}
-
-// display timer and result
-displayResult.style.visibility = "hidden";
-
-// timer function (to change timer duration => change value of duration variable)
-let duration = 30;
-function updateTimer() {
-  const minutes = Math.floor(duration / 60);
-  let seconds = duration % 60;
-
-  if (seconds < 10) {
-    seconds = "0" + seconds;
-  } else {
-    seconds = seconds;
-  }
-
-  timerElement.innerText = minutes + ":" + seconds;
-  duration--;
-
-  if (duration < 0) {
-    playerWinOrLose(totalMoneyEarn, currentEarningsNeeded);
-    duration = 0;
-    displayResult.style.visibility = "visible";
-    clearInterval(timerDisplay);
-    playerCanInput = false;
-    storeSfx.play();
-    document.querySelectorAll(".dish-image").forEach((img) => img.remove());
-  }
-}
-
-// random computer sequence generator
-function randomIngredients() {
-  computerSequence.length = 0;
-  for (let i = 0; i < 6; i++) {
-    const getRandomIngredient =
-      ingredients[Math.floor(Math.random() * ingredients.length)];
-    computerSequence.push(getRandomIngredient);
-    const itemOrder = document.querySelector(`.comp-${i + 1}`);
-    itemOrder.innerText = getRandomIngredient;
-  }
-}
-
+// --------- key bindings ---------
 document.addEventListener("keydown", function (e) {
   if (e.code === "KeyH") {
     buttonSfx.play();
     if (isGuideWindowVisible) {
-      guideWindow.style.visibility = "hidden"; 
+      guideWindow.style.visibility = "hidden";
     } else {
-      guideWindow.style.visibility = "visible"; 
+      guideWindow.style.visibility = "visible";
     }
-  
+
     isGuideWindowVisible = !isGuideWindowVisible;
   }
+
   if (playerCanInput === true) {
     handleUserInput(e);
   }
@@ -195,6 +104,76 @@ function handleUserInput(e) {
   console.log(playerSequence);
 }
 
+// --------- Game Starts Here ---------
+
+// START GAME WINDOW
+currentGoal.innerText = "$" + currentEarningsNeeded + ".00";
+let timerDisplay = null;
+function stopWatchForTimer() {
+  timerDisplay = setInterval(() => {
+    updateTimer();
+  }, 1000);
+}
+
+// click start button
+startButton.addEventListener("click", function (e) {
+  startWindow.style.visibility = "hidden";
+
+  duration = 30;
+  stopWatchForTimer();
+  updateTimer();
+  randomIngredients();
+  playerCanInput = true;
+
+  // reset past inputs for player and comp
+  currentIndex = 0;
+  document.querySelectorAll(".dish-image").forEach((img) => img.remove());
+  playerSequence.length = 0;
+
+  storeSfx.play();
+  buttonSfx.play();
+  bgm.play();
+});
+
+// timer function (to change timer duration => change value of duration variable)
+function updateTimer() {
+  const minutes = Math.floor(duration / 60);
+  let seconds = duration % 60;
+
+  if (seconds < 10) {
+    seconds = "0" + seconds;
+  } else {
+    seconds = seconds;
+  }
+
+  timerElement.innerText = minutes + ":" + seconds;
+
+  duration--;
+
+  if (duration < 0) {
+    // what happens timer ends
+    clearInterval(timerDisplay);
+    playerCanInput = false;
+    duration = 0;
+    playerWinOrLose(totalMoneyEarn, currentEarningsNeeded);
+    displayResult.style.visibility = "visible";
+
+    storeSfx.play();
+  }
+}
+
+// random computer sequence generator
+function randomIngredients() {
+  computerSequence.length = 0;
+  for (let i = 0; i < 6; i++) {
+    const getRandomIngredient =
+      ingredients[Math.floor(Math.random() * ingredients.length)];
+    computerSequence.push(getRandomIngredient);
+    const itemOrder = document.querySelector(`.comp-${i + 1}`);
+    itemOrder.innerText = getRandomIngredient;
+  }
+}
+
 // add image based on player inputs
 function imageOfInput(playerDish, index) {
   const dishSelected = document.querySelector(`.item-${index + 1}`);
@@ -211,29 +190,33 @@ function imageOfInput(playerDish, index) {
 function submitDish(playerDish, computerDish) {
   if (playerDish.length !== computerDish.length) {
     totalMoneyEarn -= refund;
-    updateMoneyCounter();
-    badSfx.play();
     playerSequence.length = 0;
+    updateMoneyCounter();
+
+    badSfx.play();
     return;
   } else {
     for (let i = 0; i < playerDish.length; i++) {
       if (playerDish[i] !== computerDish[i]) {
         totalMoneyEarn -= refund;
-        updateMoneyCounter();
-        badSfx.play();
         playerSequence.length = 0;
+        updateMoneyCounter();
+
+        badSfx.play();
         return;
       }
     }
-    cashSfx.play();
-    goodSfx.play();
     totalMoneyEarn += customerPays;
+    playerSequence.length = 0;
     randomIngredients();
     updateMoneyCounter();
-    playerSequence.length = 0;
+
+    cashSfx.play();
+    goodSfx.play();
   }
 }
 
+// TOP LEFT COUNTERS AND RESULT COUNTERS
 // update counters
 function updateMoneyCounter() {
   // counter during game
@@ -252,36 +235,70 @@ function updateDayCounter() {
 // check to see if player win or lose
 function playerWinOrLose(totalEarning, totalNeeded) {
   if (totalEarning >= totalNeeded) {
+    continueButton.disabled = false;
+    restartButton.disabled = true;
     winLoseOutput.innerText = "You managed well! You can open again tomorrow.";
     winLoseOutput.style.color = "#51a65e";
     targetResultCounter.style.color = "#51a65e";
-    currentEarningsNeeded += 15;
-    day++;
-    totalMoneyEarn = 0;
-    continueButtonWorks();
-    continueButton.style.background = "#efd34a";
-    continueButton.addEventListener("mouseover", () => {
-      // Change the button's background color
-      continueButton.style.fontSize = "33px";
-      continueButton.style.background = "#ffed91";
-    });
-    continueButton.addEventListener("mouseout", () => {
-      continueButton.style.fontSize = "30px";
-      continueButton.style.background = "#efd34a";
-    });
   } else if (totalEarning < totalNeeded) {
+    continueButton.disabled = true;
+    restartButton.disabled = false;
     winLoseOutput.innerText = "Uh-oh! Game over. Time to close shop...";
     winLoseOutput.style.color = "#e33030";
     targetResultCounter.style.color = "#e33030";
-    totalMoneyEarn = 0;
-    continueButton.style.background = "#373737";
-    continueButton.addEventListener("mouseover", () => {
-      // Change the button's background color
-      continueButton.style.fontSize = "30px";
-    });
-    continueButton.addEventListener("mouseout", () => {
-      continueButton.style.fontSize = "30px";
-    });
-    restartButtonWorks();
   }
+}
+
+// RESULT WINDOW
+
+// click restart button
+restartButton.addEventListener("click", function (e) {
+  resultWindow.style.visibility = "hidden";
+  // startWindow pops up once button is clicked
+  startWindow.style.visibility = "visible";
+  restartGame();
+
+  buttonSfx.play();
+});
+
+// click continue button
+continueButton.addEventListener("click", function (e) {
+  resultWindow.style.visibility = "hidden";
+  // startWindow pops up once button is clicked
+  startWindow.style.visibility = "visible";
+  nextRound();
+
+  buttonSfx.play();
+});
+
+// next round
+function nextRound() {
+  // update variables
+  currentEarningsNeeded += 15;
+  day++;
+  totalMoneyEarn = 0;
+
+  // update top left counters accordingly
+  updateDayCounter();
+  updateMoneyCounter();
+
+  // what is going to be shown in startWindow
+  currentGoal.innerText = "$" + currentEarningsNeeded + ".00";
+  currentDay.innerText = "Day " + day;
+}
+
+// restart round
+function restartGame() {
+  // update variables
+  currentEarningsNeeded = 30;
+  day = 1;
+  totalMoneyEarn = 0;
+
+  // update top left counters accordingly
+  updateDayCounter();
+  updateMoneyCounter();
+
+  // what is going to be shown in startWindow
+  currentGoal.innerText = "$" + currentEarningsNeeded + ".00";
+  currentDay.innerText = "Day " + day;
 }
