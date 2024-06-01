@@ -1,5 +1,19 @@
 # maki_madness
 
+Welcome to Maki Madness!
+
+Step into the shoes of a struggling chef as you strive to keep your sushi store afloat in the bustling streets of the city. In this fast-paced culinary adventure, your goal is simple: keep the doors open for as many days as possible by earning enough money to meet your daily expenses.
+
+But beware the competition is fierce, and as each day passes more popular businesses emerge - increasing the amount you need to stay in business. Your only lifeline? Crafting delicious maki rolls that satisfy the cravings of your hungry customers.
+
+Using a unique combination of keyboard buttons, you'll arranging ingredients in the correct sequence to fulfill each customer's order. But be precise! A wrong order means a full refund, and in the fast-paced world of Maki Madness, time is money. Each mistake sets you back, with the timer ticking away as you scramble to make things right.
+
+Inspired by classics like Cooking Mama and Dave the Diver, Maki Madness blends strategy, dexterity, and quick thinking into an addictive gaming experience with a simple setup using vanilla JavaScript, HTML, CSS and Illustrator.
+
+But the journey doesn't end here. Future updates promise even more excitement, with plans to introduce a main menu where players can access game rules, view high scores, and dive straight into the action. Plus, added challenges as dynamic interruptions disrupt your maki-making flow, forcing you to tackle unexpected chores before you can get back to the kitchen.
+
+Are you ready to take on the culinary challenge? Grab your apron, sharpen your skills, and let the Maki Madness begin!
+
 ---------- Credits ----------
 
 Music
