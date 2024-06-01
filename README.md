@@ -10,9 +10,11 @@ Using a unique combination of keyboard buttons, you'll arranging ingredients in 
 
 <img width="1440" alt="guide-screen" src="https://github.com/ashferoz/maki_madness/assets/129742984/b849f2ba-54dc-4466-97b8-4635cf67f5cd">
 
-<img width="1440" alt="game-scene-1" src="https://github.com/ashferoz/maki_madness/assets/129742984/d3f8197c-eab5-4e46-9741-90aac6d8baf0">
 
 <img width="1440" alt="starting-screen" src="https://github.com/ashferoz/maki_madness/assets/129742984/a9c149e4-44d8-42a6-a27d-8a90bf2d4a2d">
+
+
+<img width="1440" alt="game-scene-1" src="https://github.com/ashferoz/maki_madness/assets/129742984/d3f8197c-eab5-4e46-9741-90aac6d8baf0">
 
 Inspired by classics like Cooking Mama and Dave the Diver, Maki Madness blends strategy, dexterity, and quick thinking into an addictive gaming experience with a simple setup using vanilla JavaScript, HTML, CSS and Illustrator.
 
