@@ -31,8 +31,7 @@ Are you ready to take on the culinary challenge? Grab your apron, sharpen your s
 
 ---------- Credits ----------
 
-Music
-background music by XtremeFreddy -- https://pixabay.com/music/video-games-game-music-loop-20-156390/
+Background music by XtremeFreddy -- https://pixabay.com/music/video-games-game-music-loop-20-156390/
 
 cha ching.wav by creek23 -- https://freesound.org/s/75235/ -- License: Attribution NonCommercial 4.0
 
