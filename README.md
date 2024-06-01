@@ -8,6 +8,12 @@ But beware the competition is fierce, and as each day passes more popular busine
 
 Using a unique combination of keyboard buttons, you'll arranging ingredients in the correct sequence to fulfill each customer's order. But be precise! A wrong order means a full refund, and in the fast-paced world of Maki Madness, time is money. Each mistake sets you back, with the timer ticking away as you scramble to make things right.
 
+<img width="1440" alt="guide-screen" src="https://github.com/ashferoz/maki_madness/assets/129742984/b849f2ba-54dc-4466-97b8-4635cf67f5cd">
+
+<img width="1440" alt="game-scene-1" src="https://github.com/ashferoz/maki_madness/assets/129742984/d3f8197c-eab5-4e46-9741-90aac6d8baf0">
+
+<img width="1440" alt="starting-screen" src="https://github.com/ashferoz/maki_madness/assets/129742984/a9c149e4-44d8-42a6-a27d-8a90bf2d4a2d">
+
 Inspired by classics like Cooking Mama and Dave the Diver, Maki Madness blends strategy, dexterity, and quick thinking into an addictive gaming experience with a simple setup using vanilla JavaScript, HTML, CSS and Illustrator.
 
 But the journey doesn't end here. Future updates promise even more excitement, with plans to introduce a main menu where players can access game rules, view high scores, and dive straight into the action. Plus, added challenges as dynamic interruptions disrupt your maki-making flow, forcing you to tackle unexpected chores before you can get back to the kitchen.
