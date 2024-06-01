@@ -10,6 +10,8 @@ Using a unique combination of keyboard buttons, you'll arranging ingredients in 
 
 <img width="1440" alt="guide-screen" src="https://github.com/ashferoz/maki_madness/assets/129742984/b849f2ba-54dc-4466-97b8-4635cf67f5cd">
 
+![keyboard-guide](https://github.com/ashferoz/maki_madness/assets/129742984/66ab5bab-adf0-4223-b35f-a75913a8b92f)
+
 
 <img width="1440" alt="starting-screen" src="https://github.com/ashferoz/maki_madness/assets/129742984/a9c149e4-44d8-42a6-a27d-8a90bf2d4a2d">
 
