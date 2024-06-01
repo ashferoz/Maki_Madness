@@ -1,6 +1,6 @@
 # maki_madness
 
-Link to game: [text](https://ashferoz.github.io/maki_madness/)
+Link to game: https://ashferoz.github.io/maki_madness/
 
 Welcome to Maki Madness!
 
