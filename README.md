@@ -1,5 +1,7 @@
 # maki_madness
 
+Link to game: [text](https://ashferoz.github.io/maki_madness/)
+
 Welcome to Maki Madness!
 
 Step into the shoes of a struggling chef as you strive to keep your sushi store afloat in the bustling streets of the city. In this fast-paced culinary adventure, your goal is simple: keep the doors open for as many days as possible by earning enough money to meet your daily expenses.
