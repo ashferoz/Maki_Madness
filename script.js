@@ -26,7 +26,7 @@ let computerSequence = [];
 let playerSequence = [];
 let playerCanInput = false;
 let currentIndex = 0;
-let duration = 30;
+let duration = 60;
 let isGuideWindowVisible = false;
 guideWindow.style.visibility = "hidden";
 displayResult.style.visibility = "hidden";
@@ -119,7 +119,7 @@ function stopWatchForTimer() {
 startButton.addEventListener("click", function (e) {
   startWindow.style.visibility = "hidden";
 
-  duration = 30;
+  duration = 60;
   stopWatchForTimer();
   updateTimer();
   randomIngredients();
