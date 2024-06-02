@@ -32,7 +32,7 @@ guideWindow.style.visibility = "hidden";
 displayResult.style.visibility = "hidden";
 // player earnings
 let totalMoneyEarn = 0;
-const refund = 15;
+const refund = 10;
 const customerPays = 15;
 // how much player needs to earn
 let day = 1;
