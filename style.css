@@ -117,8 +117,8 @@ body {
   display: block;
   position: absolute;
   width: 100%;
-  min-width: 1280px;
-  object-fit: contain;
+  /* min-width: 1280px;
+  object-fit: contain; */
   margin: 0 auto;
 }
 
