@@ -9,7 +9,7 @@ Step into the shoes of a struggling chef as you strive to keep your sushi store 
 
 But beware the competition is fierce, and as each day passes more popular businesses emerge - increasing the amount you need to stay in business. Your only lifeline? Crafting delicious maki rolls that satisfy the cravings of your hungry customers.
 
-Using a unique combination of keyboard buttons, you'll arrange ingredients in the correct sequence to fulfill each customer's order. But be precise! A wrong order means a full refund, and in the fast-paced world of Maki Madness, time is money. Each mistake sets you back, with the timer ticking away as you scramble to make things right.
+Using a unique combination of keyboard buttons, you'll arrange ingredients in the correct sequence to fulfill each customer's order. But be precise! A wrong order deducts $10 from your current earnings. And in the fast-paced world of Maki Madness, time is money. Each mistake sets you back, with the timer ticking away as you scramble to make things right.
 
 ## Inspiration and technology used
 
