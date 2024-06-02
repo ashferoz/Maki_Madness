@@ -5,6 +5,11 @@
 
 body {
   background-image: url(assets/bg.png);
+  background-size: contain;
+  margin: 0;
+}
+
+.container {
   /* overflow: hidden; */
   height: 100vh;
   margin: auto 0;
@@ -111,8 +116,9 @@ body {
 .belt img {
   display: block;
   position: absolute;
-  width: 100vw;
-  object-fit: cover;
+  width: 100%;
+  min-width: 1280px;
+  object-fit: contain;
   margin: 0 auto;
 }
 
