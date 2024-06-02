@@ -1,6 +1,6 @@
 # Maki Madness
 
-Link to game: https://ashferoz.github.io/maki_madness/
+Link to game: https://ashferoz.github.io/Maki_Madness/
 
 ## Game Introductory
 Welcome to Maki Madness!
