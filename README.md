@@ -43,7 +43,7 @@ Inspired by classics like Cooking Mama and Dave the Diver, Maki Madness blends s
 
 ## Future updates
 
-But the journey doesn't end here. Future updates promise even more excitement, with plans to introduce a main menu where players can access game rules, view high scores, and dive straight into the action. Plus, added challenges as dynamic interruptions disrupt your maki-making flow, forcing you to tackle unexpected chores before you can get back to the kitchen. Quit button will also be added so that players are able to escape the game without having to refresh the page or purposefully losing the next round. Key bindings for start, restart and continue buttons for a more seamless experience.
+But the journey doesn't end here. Future updates promise even more excitement, with plans to introduce a main menu where players can access game rules, view high scores, and dive straight into the action. Plus, added challenges as dynamic interruptions disrupt your maki-making flow, forcing you to tackle unexpected chores before you can get back to the kitchen. Quit button will also be added so that players are able to escape the game without having to refresh the page or purposefully losing the next round. Key bindings for start, restart and continue buttons for a more seamless experience. Timer to pause when player access guide.
 
 Are you ready to take on the culinary challenge? Grab your apron, sharpen your skills, and let the Maki Madness begin!
 
